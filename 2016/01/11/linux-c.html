@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>linux c | Brian/XuBo/bbxyard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="boxu">
+  
+  
+    <meta name="description" content="守护进程123456789101112131415161718192021222324252627pid_t pid = fork();if (pid &amp;lt; 0)&amp;#123;       fprintf(stderr, &quot;fork sub process failed!!\n&quot;);    return -2;&amp;#125;   else if (pid &amp;gt; 0)&amp;#123;">
+  
+  <meta name="description" content="守护进程123456789101112131415161718192021222324252627pid_t pid = fork();if (pid &amp;lt; 0)&amp;#123;       fprintf(stderr, &quot;fork sub process failed!!\n&quot;)">
+<meta name="keywords" content="linux,c,c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux c">
+<meta property="og:url" content="https://bbxyard.github.io/blog/2016/01/11/linux-c.html">
+<meta property="og:site_name" content="Brian&#x2F;XuBo&#x2F;bbxyard">
+<meta property="og:description" content="守护进程123456789101112131415161718192021222324252627pid_t pid = fork();if (pid &amp;lt; 0)&amp;#123;       fprintf(stderr, &quot;fork sub process failed!!\n&quot;);    return -2;&amp;#125;   else if (pid &amp;gt; 0)&amp;#123;">
+<meta property="og:updated_time" content="2016-01-12T16:36:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux c">
+<meta name="twitter:description" content="守护进程123456789101112131415161718192021222324252627pid_t pid = fork();if (pid &amp;lt; 0)&amp;#123;       fprintf(stderr, &quot;fork sub process failed!!\n&quot;);    return -2;&amp;#125;   else if (pid &amp;gt; 0)&amp;#123;">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/blog/favicon.ico">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/blog/">Brian/XuBo/bbxyard</a></h1>
+    <p><a href="/blog/">since 1985</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/blog/">Home</a></li>
+      
+        <li><a href="/blog/archives">Archives</a></li>
+      
+        <li><a href="/blog/about">About</a></li>
+      
+        <li><a href="https://www.bbxyard.com/app/wiki">Wiki</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+
+    <div class="content"><article class="photo">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/blog/2016/01/11/linux-c.html">
+  <time datetime="2016-01-11T12:00:00.000Z">
+    2016-01-11
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">linux c</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a><strong>守护进程</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> pid = fork();</span><br><span class="line"><span class="keyword">if</span> (pid &lt; <span class="number">0</span>)</span><br><span class="line">&#123;   </span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"fork sub process failed!!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (pid &gt; <span class="number">0</span>)</span><br><span class="line">&#123;   </span><br><span class="line">     <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"daemon sub process %d\n"</span>, pid);</span><br><span class="line">     <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"logfile %s\n"</span>, logfile);</span><br><span class="line">     <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// exit this processs [parent/current]</span></span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;   </span><br><span class="line">     setsid(); <span class="comment">// net session and new leader.</span></span><br><span class="line">     my::close_non_std_open_fds();  <span class="comment">// close 0,1,2 --</span></span><br><span class="line">     my::close_std_open_fds();      <span class="comment">// close all file handle</span></span><br><span class="line">     <span class="comment">// sub process run</span></span><br><span class="line">     ret = svc.start(workdir);</span><br><span class="line">     <span class="keyword">char</span> result[<span class="number">2</span> * <span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">     <span class="built_in">sprintf</span>(result, <span class="string">"xx_daemon: workdir=%s, status=%d, pid=%d!\n"</span>, workdir, ret, getpid());</span><br><span class="line">     syslog(LOG_INFO, result);</span><br><span class="line">     <span class="comment">// wait to exit!</span></span><br><span class="line">     my::thr_sem exit_sem;</span><br><span class="line">     exit_sem.wait(); <span class="comment">// no need to exit as a daemon.</span></span><br><span class="line">     svc.stop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="new"><a href="#new" class="headerlink" title="new"></a><strong>new</strong></h2>
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/blog/tags/c/">c</a>, <a class="tags-link" href="/blog/tags/c/">c++</a>, <a class="tags-link" href="/blog/tags/linux/">linux</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><!-- 不蒜子 -->
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 2017 <a href="/blog/">boxu</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   |
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+   |
+  <span id="busuanzi_container_page_pv">
+    Views <span id="busuanzi_value_page_pv"></span> times
+  </span>
+  <br />
+  Total <span id="busuanzi_value_site_pv"></span> views.
+    您是xxx的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+  <span id="busuanzi_value_page_pv"></span> Hits
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/js/scale.fix.js"></script>
+<script src="/blog/js/jquery.imagesloaded.min.js"></script>
+<script src="/blog/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+
+</body>
+</html>

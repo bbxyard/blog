@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>shell skills | Brian/XuBo/bbxyard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="boxu">
+  
+  
+    <meta name="description" content="创建目录树1mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125;
+初始化用户目录12mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125;;ln -s var/log">
+  
+  <meta name="description" content="创建目录树1mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125; 初始化用户目录12mkdir -p &amp;#123;bin,lib,stub,opt,var/&am">
+<meta name="keywords" content="linux,shell,bash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell skills">
+<meta property="og:url" content="https://bbxyard.github.io/blog/2015/12/21/shell.html">
+<meta property="og:site_name" content="Brian&#x2F;XuBo&#x2F;bbxyard">
+<meta property="og:description" content="创建目录树1mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125; 初始化用户目录12mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125;;ln -s var/log">
+<meta property="og:updated_time" content="2016-08-18T15:40:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell skills">
+<meta name="twitter:description" content="创建目录树1mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125; 初始化用户目录12mkdir -p &amp;#123;bin,lib,stub,opt,var/&amp;#123;log,tmp,run&amp;#125;,devhome,backup,data&amp;#125;;ln -s var/log">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/blog/favicon.ico">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/blog/">Brian/XuBo/bbxyard</a></h1>
+    <p><a href="/blog/">since 1985</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/blog/">Home</a></li>
+      
+        <li><a href="/blog/archives">Archives</a></li>
+      
+        <li><a href="/blog/about">About</a></li>
+      
+        <li><a href="https://www.bbxyard.com/app/wiki">Wiki</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+
+    <div class="content"><article class="photo">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/blog/2015/12/21/shell.html">
+  <time datetime="2015-12-21T15:00:00.000Z">
+    2015-12-21
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">shell skills</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="创建目录树"><a href="#创建目录树" class="headerlink" title="创建目录树"></a><strong>创建目录树</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#123;bin,lib,stub,opt,var/&#123;<span class="built_in">log</span>,tmp,run&#125;,devhome,backup,data&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化用户目录"><a href="#初始化用户目录" class="headerlink" title="初始化用户目录"></a><strong>初始化用户目录</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#123;bin,lib,stub,opt,var/&#123;<span class="built_in">log</span>,tmp,run&#125;,devhome,backup,data&#125;;</span><br><span class="line">ln -s var/<span class="built_in">log</span> <span class="built_in">log</span>; ln -s var/tmp tmp</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Sudo-执行"><a href="#Sudo-执行" class="headerlink" title="Sudo 执行"></a><strong>Sudo 执行</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SUDO_PASSWD=******</span><br><span class="line"><span class="keyword">function</span> Sudo()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"># sent the pass and invoke a null command once.</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$SUDO_PASSWD</span> | sudo -S cat /dev/null &gt;/dev/null 2&gt;/dev/null</span><br><span class="line">    <span class="comment"># execute the real command</span></span><br><span class="line">    sudo <span class="variable">$@</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除缺省的目录，针对无桌面环境"><a href="#删除缺省的目录，针对无桌面环境" class="headerlink" title="删除缺省的目录，针对无桌面环境"></a><strong>删除缺省的目录，针对无桌面环境</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir 桌面 音乐 下载 文档 图片 视频 模板 公共的</span><br></pre></td></tr></table></figure>
+<h2 id="使用-amp-将stderr，stdout重定向到同一文件"><a href="#使用-amp-将stderr，stdout重定向到同一文件" class="headerlink" title="使用&amp;将stderr，stdout重定向到同一文件"></a><strong>使用&amp;将stderr，stdout重定向到同一文件</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等价于 find / -name "*.conf" &gt;/tmp/find.log 2&gt;&amp;1</span></span><br><span class="line">find / -name <span class="string">"*.conf"</span> &amp;&gt;/tmp/find.log</span><br></pre></td></tr></table></figure>
+<h2 id="ssh远程执行脚本"><a href="#ssh远程执行脚本" class="headerlink" title="ssh远程执行脚本"></a><strong>ssh远程执行脚本</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无须scp脚本到服务器，直接执行即可.</span></span><br><span class="line"><span class="comment"># ssh user@host bash &lt;本地脚本路径</span></span><br><span class="line">ssh user@host bash &lt;/tmp/1.sh</span><br></pre></td></tr></table></figure>
+<h2 id="color-echo"><a href="#color-echo" class="headerlink" title="color echo"></a><strong>color echo</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># write this to .bash_profile, .bashrc or your_own.rc</span></span><br><span class="line">NORMAL=$(tput sgr0)</span><br><span class="line">GREEN=$(tput setaf 2; tput bold)</span><br><span class="line">YELLOW=$(tput setaf 3)</span><br><span class="line">RED=$(tput setaf 1)</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">red</span></span>()    &#123; <span class="built_in">echo</span> -e <span class="string">"<span class="variable">$RED</span>$*<span class="variable">$NORMAL</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">green</span></span>()  &#123; <span class="built_in">echo</span> -e <span class="string">"<span class="variable">$GREEN</span>$*<span class="variable">$NORMAL</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">yellow</span></span>() &#123; <span class="built_in">echo</span> -e <span class="string">"<span class="variable">$YELLOW</span>$*<span class="variable">$NORMAL</span>"</span>; &#125;</span><br><span class="line"><span class="comment"># run</span></span><br><span class="line">red <span class="string">"this is a red echo"</span></span><br><span class="line">green <span class="string">"this is a green echo"</span></span><br><span class="line">yellow <span class="string">"this is a yellow echo"</span></span><br></pre></td></tr></table></figure>
+<h2 id="color-stdout-stderr"><a href="#color-stdout-stderr" class="headerlink" title="color stdout/stderr"></a><strong>color stdout/stderr</strong></h2><p>请安装: <a href="http://nojhan.github.io/colout/" target="_blank" rel="noopener">colout</a></p>
+<h2 id="next"><a href="#next" class="headerlink" title="next"></a><strong>next</strong></h2>
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/blog/tags/bash/">bash</a>, <a class="tags-link" href="/blog/tags/linux/">linux</a>, <a class="tags-link" href="/blog/tags/shell/">shell</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><!-- 不蒜子 -->
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 2017 <a href="/blog/">boxu</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   |
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+   |
+  <span id="busuanzi_container_page_pv">
+    Views <span id="busuanzi_value_page_pv"></span> times
+  </span>
+  <br />
+  Total <span id="busuanzi_value_site_pv"></span> views.
+    您是xxx的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+  <span id="busuanzi_value_page_pv"></span> Hits
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/js/scale.fix.js"></script>
+<script src="/blog/js/jquery.imagesloaded.min.js"></script>
+<script src="/blog/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+
+</body>
+</html>
